@@ -26,10 +26,20 @@ if grep -E -q '(src|href)="(\./)?assets/' dist/index.html; then
   echo "dist audit FAILED — relative asset URL breaks deep SPA routes"
   exit 1
 fi
-if ! grep -E -q '(src|href)="/assets/' dist/index.html; then
-  echo "dist audit FAILED — production shell has no origin-root asset URLs"
-  exit 1
-fi
+case "${XO_DEPLOY_TARGET:-cloudflare}" in
+  github-pages)
+    if ! grep -E -q '(src|href)="/Xo/assets/' dist/index.html; then
+      echo "dist audit FAILED — GitHub Pages shell has no /Xo/assets/ URLs"
+      exit 1
+    fi
+    ;;
+  *)
+    if ! grep -E -q '(src|href)="/assets/' dist/index.html; then
+      echo "dist audit FAILED — production shell has no origin-root asset URLs"
+      exit 1
+    fi
+    ;;
+esac
 
 public_assets_list=$(mktemp)
 trap 'rm -f "$public_assets_list"' EXIT
