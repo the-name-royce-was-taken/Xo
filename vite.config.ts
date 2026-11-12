@@ -35,10 +35,9 @@ function buildHash(): string {
 }
 
 export default defineConfig({
-  // Cloudflare serves this project at the origin root. Absolute bundle URLs
-  // keep SPA fallbacks such as /play/neocity from resolving ./assets beneath
-  // the deep route and receiving HTML in place of JavaScript.
-  base: '/Xo/',
+  // GitHub Pages serves this project below /Xo/; Cloudflare serves it at /
+  // Select the matching asset prefix in the deployment workflow.
+  base: process.env.XO_DEPLOY_TARGET === 'github-pages' ? '/Xo/' : '/',
   plugins: [legalNotices()],
   define: {
     __XO_BUILD_HASH__: JSON.stringify(buildHash()),
