@@ -219,7 +219,7 @@ async function main(): Promise<void> {
   let browser: Browser | null = null;
   const peers: BrowserPeer[] = [];
   try {
-    server = await createServer({ server: { host: '127.0.0.1', port: PORT, strictPort: true }, logLevel: 'silent' });
+    server = await createServer({ base: '/', server: { host: '127.0.0.1', port: PORT, strictPort: true }, logLevel: 'silent' });
     await server.listen();
     browser = await selectedBrowserType().launch({ headless: true });
     await validateProductionShell(browser);
