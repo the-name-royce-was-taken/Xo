@@ -1,3 +1,5 @@
+
+
 import { execFileSync } from 'node:child_process';
 import { copyFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -36,7 +38,7 @@ export default defineConfig({
   // Cloudflare serves this project at the origin root. Absolute bundle URLs
   // keep SPA fallbacks such as /play/neocity from resolving ./assets beneath
   // the deep route and receiving HTML in place of JavaScript.
-  base: '/',
+  base: '/Xo/',
   plugins: [legalNotices()],
   define: {
     __XO_BUILD_HASH__: JSON.stringify(buildHash()),
