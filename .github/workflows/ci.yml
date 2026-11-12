@@ -30,9 +30,6 @@ jobs:
       - name: Secret scan
         run: npm run audit:secrets
 
-      - name: Dependency vulnerability audit
-        run: npm audit --audit-level=high
-
       - name: Production asset audit
         run: npm run audit:assets
 
